@@ -1,0 +1,65 @@
+{# _form.html.twig #}
+
+<style>
+    /* CSS styles */
+    .white-input {
+        background-color: white;
+    }
+
+    .white-input ::placeholder {
+        color: #adb5bd; /* You can adjust the placeholder color as needed */
+    }
+</style>
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            {{ form_start(form) }}
+                <div class="form-group">
+                    {{ form_label(form.Nom, 'Nom', {'label_attr': {'class': 'form-label'}}) }}
+                    {{ form_widget(form.Nom, {'attr': {'class': 'form-control white-input'}}) }}
+                    {{ form_errors(form.Nom) }}
+                </div>
+
+                <div class="form-group">
+                    {{ form_label(form.Description, 'Description', {'label_attr': {'class': 'form-label'}}) }}
+                    {{ form_widget(form.Description, {'attr': {'class': 'form-control white-input'}}) }}
+                    {{ form_errors(form.Description) }}
+                </div>
+                <div class="form-group">
+                    {{ form_label(form.Date, 'Date', {'label_attr': {'class': 'form-label'}}) }}
+                    {{ form_widget(form.Date, {'attr': {'class': 'form-control white-input'}}) }}
+                    {{ form_errors(form.Date) }}
+                </div>
+
+                <div class="form-group">
+                    {{ form_label(form.Lieu, 'Lieu', {'label_attr': {'class': 'form-label'}}) }}
+                    {{ form_widget(form.Lieu, {'attr': {'class': 'form-control white-input'}}) }}
+                    {{ form_errors(form.Lieu) }}
+                </div>
+
+                <div class="form-group">
+                    {{ form_label(form.NbrParticipant, 'Nombre de Participants', {'label_attr': {'class': 'form-label'}}) }}
+                    {{ form_widget(form.NbrParticipant, {'attr': {'class': 'form-control white-input'}}) }}
+                    {{ form_errors(form.NbrParticipant) }}
+                </div>
+
+                <div class="form-group">
+                    {{ form_label(form.Prix, 'Prix', {'label_attr': {'class': 'form-label'}}) }}
+                    {{ form_widget(form.Prix, {'attr': {'class': 'form-control white-input'}}) }}
+                    {{ form_errors(form.Prix) }}
+                </div>
+
+                <div class="form-group">
+                    {{ form_label(form.imageFile, 'Image de l\'événement', {'label_attr': {'class': 'form-label'}}) }}
+                    {{ form_widget(form.imageFile, {'attr': {'class': 'form-control-file'}}) }}
+                    {{ form_row(form._token) }}
+                </div>
+
+                <div class="text-center"> {# Centered container for the button #}
+                    <button type="submit" class="btn btn-primary">Enregistrer</button>
+                </div>
+            {{ form_end(form) }}
+        </div>
+    </div>
+</div>

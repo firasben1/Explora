@@ -1,0 +1,81 @@
+{% extends 'base1.html.twig' %}
+
+{% block title %}
+    <title>Liste des Locations</title>
+{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <h1>Liste des Locations</h1>
+
+        <div class="table-responsive">
+            <table class="table table-striped table-hover">
+                <thead class="thead-dark">
+                    <tr>
+                        <th scope="col">ID</th>
+                        <th scope="col">Nom</th>
+                        <th scope="col">Prénom</th>
+                        <th scope="col">Mail</th>
+                        <th scope="col">Mobile</th>
+                        <th scope="col">Adresse</th>
+                        <th scope="col">Date de prise</th>
+                        <th scope="col">Date de dépôt</th>
+                        <th scope="col">Numéro de CIN</th>
+                      
+                        <th scope="col">Permis de conduite</th>
+                        <th scope="col">Statut</th>
+                        <th scope="col">Voiture</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for location in locations %}
+                        {% if app.user is defined and app.user.id == location.user.id %}
+
+                     <tr>
+                            <td>{{ location.id }}</td>
+                            <td>{{ location.nom }}</td>
+                            <td>{{ location.prenom }}</td>
+                            <td>{{ location.mail }}</td>
+                            <td>{{ location.mobile }}</td>
+                            <td>{{ location.adresse }}</td>
+                            <td>{{ location.datePrise ? location.datePrise|date('d-m-Y') : '' }}</td>
+                            <td>{{ location.dateDepot ? location.dateDepot|date('d-m-Y') : '' }}</td>
+                            <td>{{ location.numCin }}</td>
+                       
+                            <td>{{ location.permisConduite }}</td>
+                           
+                          
+                       <td>
+   {% if location.reponseLocation %}
+       {{ location.reponseLocation.statut }}
+   {% else %}
+       En attente...
+   {% endif %}
+</td>
+<td>{% if location.voiture %}
+    {{ location.voiture.marque }}
+{% endif %}</td>
+                        </tr>
+                    {% endif %}
+
+                    {% endfor %}
+                   
+                </tbody>
+            </table>
+            <div class="mb-3"></div><!-- End .mb-3 -->
+
+            <nav aria-label="Page navigation">
+                <ul class="pagination justify-content-center">
+                    <li class="page-item disabled">
+                       
+                  
+                </ul>
+                </nav>
+                </div><!-- End .container -->
+                <div class="d-flex justify-content-center">
+                {% do locations.SetPageRange(2) %}
+                {{ knp_pagination_render(locations, "pagination.html.twig") }}
+                </div>
+        </div>
+    </div>
+{% endblock %}

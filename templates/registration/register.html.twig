@@ -1,0 +1,81 @@
+
+{% extends 'base1.html.twig' %}
+
+{% block title %}Register{% endblock %}
+
+{% block body %}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <h1 class="text-center">Register</h1>
+            {{ form_errors(registrationForm) }}
+            {{ form_start(registrationForm) }}
+                <div class="form-group">
+                    {{ form_row(registrationForm.email, {'attr': {'class': 'form-control', 'placeholder': 'Email address'}}) }}
+                </div>
+                <div class="form-group">
+                    {{ form_row(registrationForm.nom, {'attr': {'class': 'form-control', 'placeholder': 'Last Name'}}) }}
+                </div>
+                <div class="form-group">
+                    {{ form_row(registrationForm.prenom, {'attr': {'class': 'form-control', 'placeholder': 'First Name'}}) }}
+                </div>
+                <div class="form-group">
+                    {{ form_row(registrationForm.plainPassword, {
+                        'label': 'Password',
+                        'attr': {'class': 'form-control password-field', 'placeholder': 'Password'}
+                    }) }}
+                    <small class="form-text text-muted">
+                        Your password must be at least 6 characters long, contain letters and numbers, and must not contain spaces, special characters, or emoji.
+                    </small>
+                    <div class="d-flex justify-content-center mt-2">
+                        <div class="password-strength-container" style="height: 10px; width: 50%; background-color: #ddd; position: relative; border-radius: 5px; overflow: hidden;">
+                            <div id="password-strength-bar" style="height: 100%; width: 0%; background-color: red; position: absolute; transition: width 0.5s ease-in-out;"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    {{ form_label(registrationForm.imageFile, 'Image Topic:', {'label_attr': {'class': 'control-label text-left font-weight-bold text-primary col-md-3'}}) }}
+                    {{ form_widget(registrationForm.imageFile) }}
+                    {{ form_row(registrationForm._token) }}
+                </div>
+                <div class="form-check mt-4">
+                    {{ form_row(registrationForm.agreeTerms, {'label': 'Agree to Terms', 'attr': {'class': 'form-check-input'}}) }}
+                </div>
+                <!-- Register button initially disabled -->
+                <button type="submit" class="btn btn-primary btn-block mt-3" id="registerButton" disabled>Register</button>
+            {{ form_end(registrationForm) }}
+        </div>
+    </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var passwordField = document.querySelector('.password-field');
+        var strengthBar = document.getElementById('password-strength-bar');
+        var registerButton = document.getElementById('registerButton');
+
+        passwordField.addEventListener('input', function() {
+            var strength = 0;
+            var password = passwordField.value;
+            
+            if (password.length >= 6) strength += 33.3;
+            if (password.match(/\d+/) && password.match(/[a-zA-Z]/)) strength += 33.3;
+            if (password.match(/[\W_]/)) strength += 33.4; // Slightly higher to ensure it can reach 100%
+
+            strengthBar.style.width = strength + '%';
+
+            // Update the strength bar color based on the strength
+            if (strength >= 100) {
+                strengthBar.style.backgroundColor = '#4caf50'; // Green for strong
+            } else {
+                strengthBar.style.backgroundColor = strength > 33.3 ? '#ffc107' : '#ff3e36'; // Amber or Red
+            }
+
+            // Enable register button only when the strength reaches 100%
+            registerButton.disabled = strength < 100;
+        });
+    });
+</script>
+
+
+{% endblock %}

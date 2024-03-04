@@ -1,0 +1,39 @@
+{% extends 'base1.html.twig' %}
+
+    {% block title %}
+        <title>Reservation index</title>
+    {% endblock %}
+    
+    {% block body %}
+        <div class="container mt-5">
+            <h1 class="text-center mb-4"> Liste Reservation </h1>
+    
+            <table class="table">
+    <thead style="background-color: #f2f2f2;">
+        <tr>
+            <th>Id</th>
+            <th>Etat</th>
+            <th>actions</th>
+        </tr>
+    </thead>
+                    <tbody>
+                        {% for reservation in reservations %}
+                            {% if app.user is defined and app.user.id == reservation.user.id %}
+                            <tr>
+                                <td>{{ reservation.id }}</td>
+                                <td>{{ reservation.Etat }}</td>
+                                <td>
+                                    <a href="{{ path('app_reservation_show_User', {'id': reservation.id}) }}" class="btn btn-success" style="background-color: #86b817; color: #fff;">Show</a>
+
+                                </td>
+                            </tr>
+                       
+                        {% endif %}
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    
+    {% endblock %}
+    

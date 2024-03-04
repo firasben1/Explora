@@ -1,0 +1,59 @@
+{% extends 'base1.html.twig' %}
+
+    {% block body %} 
+        <!-- Page Content Start -->
+        <div class="container-fluid mt-5" style="background-color: #f2f2f2;">
+            <div class="row justify-content-center">
+                <div class="col-md-8 p-4 rounded bg-white">
+                    <h1 class="text-center mb-4">{{ evenement.Nom }}</h1>
+    
+                    <div class="row">
+                        <div class="col-md-6 mb-4">
+                            <figure class="entry-media">
+                                <img src="{{ vich_uploader_asset(evenement, 'imageFile') }}" class="img-fluid rounded" style="height: 470px;" alt="evenement Image">
+                                {{ evenement.imageFile }}
+                            </figure><!-- End .entry-media -->
+                        </div>
+                        <div class="col-md-6">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h5 class="card-title">Description</h5>
+                                    <p class="card-text">{{ evenement.Description }}</p>
+                                </div>
+                            </div>
+                            <div class="card mt-3">
+                                <div class="card-body">
+                                    <h5 class="card-title">Lieu</h5>
+                                    <p class="card-text">{{ evenement.Lieu }}</p>
+                                </div>
+                            </div>
+                            <div class="card mt-3">
+                                <div class="card-body">
+                                    <h5 class="card-title">Nombre de Participants</h5>
+                                    <p class="card-text">{{ evenement.NbrParticipant }}</p>
+                                </div>
+                            </div>
+                            <div class="card mt-3">
+                                <div class="card-body">
+                                    <h5 class="card-title">Prix</h5>
+                                    <p class="card-text">{{ evenement.Prix }}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+    
+                    <div class="text-center mt-4">
+                        {% if app.user %}
+                        <a href="{{ path('number_participant', {'id_evenement': evenement.id}) }}" class="btn btn-success">Réserver</a>
+                         {% endif %}
+
+
+                    </div>
+                    <h5 class="card-title">Veuilliez Vous Se Connecter Afin De Réserver</h5>
+
+                </div>
+            </div>
+        </div>
+        <!-- Page Content End -->
+    {% endblock %}
+    

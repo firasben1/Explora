@@ -1,0 +1,26 @@
+{% extends 'base1.html.twig' %}
+
+    {% block body %}
+        <!-- Page Content Start -->
+        <div class="container-fluid mt-5" style="background-color: #f2f2f2;">
+            <div class="row justify-content-center">
+                <div class="col-md-6 p-4 rounded bg-white">
+                    <h1 class="text-center mb-4">Number of Participants</h1>
+    
+                    {{ form_start(form, {'attr': {'class': 'form-horizontal'}}) }}
+                    <div class="form-group">
+                        {{ form_label(form.number, null, {'label_attr': {'class': 'control-label col-sm-4'}}) }}
+                        <div class="col-sm-8">
+                            {{ form_widget(form.number, {'attr': {'class': 'form-control'}}) }}
+                        </div>
+                    </div>
+                    <div class="form-group mt-3 text-center"> <!-- Added margin-top to create space -->
+                        {{ form_widget(form.submit, {'attr': {'class': 'btn btn-success'}}) }}
+                    </div>
+                    {{ form_end(form) }}
+                </div>
+            </div>
+        </div>
+        <!-- Page Content End -->
+    {% endblock %}
+    

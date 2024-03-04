@@ -1,0 +1,29 @@
+{% extends 'base1.html.twig' %}
+
+{% block body %}
+<table class="table">
+    <tbody>
+    <tr>
+        <th>Id</th>
+        <td>{{ participation.id }}</td>
+    </tr>
+    <tr>
+        <th>Email</th>
+        <td>{{ participation.Email }}</td>
+    </tr>
+    <tr>
+        <th>Numero</th>
+        <td>{{ participation.Numero }}</td>
+    </tr>
+    <tr>
+        <th>Nom</th>
+        <td>{{ participation.Nom }}</td>
+    </tr>
+    <tr>
+        <th>Prenom</th>
+        <td>{{ participation.Prenom }}</td>
+    </tr>
+    </tbody>
+</table>
+
+{% endblock %}

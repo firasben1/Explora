@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+
+<title>Participation index</title>
+
+{% block body %}
+    <h1>Participation index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Email</th>
+                <th>Numero</th>
+                <th>Nom</th>
+                <th>Prenom</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for participation in participations %}
+            <tr>
+                <td>{{ participation.id }}</td>
+                <td>{{ participation.Email }}</td>
+                <td>{{ participation.Numero }}</td>
+                <td>{{ participation.Nom }}</td>
+                <td>{{ participation.Prenom }}</td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="6">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}

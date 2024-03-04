@@ -1,0 +1,81 @@
+{% extends 'base1.html.twig' %}
+
+{% block title %}Log in!{% endblock %}
+
+{% block body %}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <form method="post" class="form-signin">
+                {% if error %}
+                    <div class="alert alert-danger text-center">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+                {% endif %}
+
+                {% if app.user %}
+                    <div class="mb-3 text-center">
+                        You are logged in as {{ app.user.userIdentifier }}, <a href="{{ path('app_logout') }}">Logout</a>
+                    </div>
+                {% endif %}
+
+                <h1 class="h3 mb-3 font-weight-normal text-center">Please sign in</h1>
+                <label for="inputEmail" class="sr-only">Email</label>
+                <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" placeholder="Email address" autocomplete="email" required autofocus>
+
+                <label for="inputPassword" class="sr-only">Password</label>
+                <input type="password" name="password" id="inputPassword" class="form-control" placeholder="Password" autocomplete="current-password" required>
+                
+                <div id="captcha"></div> <!-- Affichage du CAPTCHA -->
+                <input type="text" id="inputCaptcha" placeholder="Entrez le code ici" required> <!-- Champ de saisie pour l'utilisateur -->
+
+
+                <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+
+                <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+            </form>
+        </div>
+    </div>
+</div>
+<script src="https://www.google.com/recaptcha/api.js?render=your_public_key"></script>
+<script>
+    // Initialisation de reCAPTCHA et exécution avec l'action 'submit'
+    grecaptcha.ready(function() {
+        // Remplacer 'your_public_key' par votre clé de site reCAPTCHA réelle
+        grecaptcha.execute('your_public_key', {action: 'submit'}).then(function(token) {
+            // Définir le jeton dans l'entrée cachée avant la soumission du formulaire
+            document.getElementById('recaptchaToken').value = token;
+        });
+    });
+
+    // Générer un code CAPTCHA aléatoire
+    function genererCaptcha() {
+        var captcha = '';
+        var caracteres = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+        var longueur = 6; // Longueur du CAPTCHA
+
+        for (var i = 0; i < longueur; i++) {
+            var index = Math.floor(Math.random() * caracteres.length);
+            captcha += caracteres.charAt(index);
+        }
+
+        document.getElementById('captcha').innerHTML = captcha; // Afficher le CAPTCHA
+    }
+
+    // Vérifier si l'entrée de l'utilisateur correspond au CAPTCHA
+    function verifierCaptcha() {
+        var inputCaptcha = document.getElementById('inputCaptcha').value; // Obtenir la saisie de l'utilisateur
+        var captcha = document.getElementById('captcha').innerText; // Obtenir le CAPTCHA généré
+
+        if(inputCaptcha == captcha) {
+            document.getElementById('resultat').innerHTML = 'CAPTCHA valide!';
+        } else {
+            document.getElementById('resultat').innerHTML = 'CAPTCHA invalide. Essayez à nouveau.';
+        }
+    }
+
+    // Générer un nouveau CAPTCHA lors du chargement de la page
+    window.onload = function() {
+        genererCaptcha();
+    };
+</script>
+
+{% endblock %}

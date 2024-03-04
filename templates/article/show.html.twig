@@ -1,0 +1,243 @@
+{% extends 'base1.html.twig' %}
+
+{% block body %}
+<html lang="en">
+<main class="main">
+        	<div class="page-header text-center" style="background-image: url('{{asset('assets/images/page-header-bg.jpg')}}')">
+        		<div class="container">
+        			<h1 class="page-title">Article</h1>
+        		</div><!-- End .container -->
+        	</div><!-- End .page-header -->
+            <nav aria-label="breadcrumb" class="breadcrumb-nav mb-3">
+                <div class="container">
+                  
+                </div><!-- End .container -->
+            </nav><!-- End .breadcrumb-nav -->
+
+            <div class="page-content">
+                <div class="container">
+                	<div class="row">
+                		<div class="col-lg-9">
+                            <article class="entry single-entry">
+                                <h2 class="entry-title">
+                                       {{ article.titre}}
+                                    </h2><!-- End .entry-title -->
+                                <figure class="entry-media">
+                                    <img src=" {{ vich_uploader_asset(article, 'imageFile') }}" width="600" alt="Article Image">
+                                               {{ article.imageFile }}
+
+                                </figure><!-- End .entry-media -->
+
+                                <div class="entry-body">
+                                    <div class="entry-meta">
+                                        <span class="entry-author">
+                                            by <a href="#">{{ article.user.nom }} {{ article.user.prenom }}</a>
+                                            </span>
+                                        <span class="meta-separator">|</span>
+                                        <a href="#">{{ article.date|date('Y-m-d H:i:s') }}</a>
+                                        <span class="meta-separator">|</span>
+                                        <a href="#">{{ article.nbcommentaire  }} Commentaires</a>
+                                    </div><!-- End .entry-meta -->
+
+                                    
+
+                                 
+                                    <div class="entry-content editor-content">
+                                        <div style="background-color: #f4f4f4; padding: 10px; border-radius: 5px; margin-top: 10px;">
+                                            <p style="font-size: 16px; line-height: 1.6; color: #333;">{{ article.description }}</p>
+                                        </div>
+                                        <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+<img src="" />
+                                        <div id="google_translate_element">
+                                        <button onclick="speakSelectedText()" class="btn btn-success">Lire en vocal</button>
+                                        <button onclick="stopSpeaking()" class="btn btn-danger">Arrêter</button>
+                                    </div>
+                                    
+                                    <script type="text/javascript">
+                                        var currentUtterance = null;
+                                    
+                                        function googleTranslateElementInit() {
+                                            new google.translate.TranslateElement({pageLanguage: 'en'}, 'google_translate_element');
+                                        }
+                                    
+                                        function speakSelectedText() {
+                                            var selectedText = window.getSelection().toString();
+                                            if (selectedText) {
+                                                stopSpeaking();
+                                                currentUtterance = new SpeechSynthesisUtterance(selectedText);
+                                                window.speechSynthesis.speak(currentUtterance);
+                                            } else {
+                                                alert("Veuillez sélectionner du texte pour le lire à voix haute.");
+                                            }
+                                        }
+                                    
+                                        function stopSpeaking() {
+                                            if (currentUtterance !== null) {
+                                                window.speechSynthesis.cancel();
+                                                currentUtterance = null;
+                                            }
+                                        }
+                                    
+                                       function selectLanguage(languageCode) {
+                                        var select = document.getElementById('languageSelector');
+                                        for (var i = 0; i < select.options.length; i++) {
+                                            var option = select.options[i];
+                                            if (option.value === languageCode) {
+                                                select.selectedIndex = i;
+                                                // Déclencher manuellement l'événement onchange pour simuler la sélection de l'utilisateur
+                                                var event = new Event('change');
+                                                select.dispatchEvent(event);
+                                                break;
+                                            }
+                                        }
+                                    }
+                                    
+                                    </script>
+
+                                        <div class="pb-1"></div><!-- End .mb-1 -->
+
+
+
+                                        <div class="col-md-auto mt-2 mt-md-0">
+                                            <div class="col-md-auto mt-2 mt-md-0">
+                                                <div class="social-icons social-icons-color">
+                                                    <span class="social-label">Share this post:</span>
+                                                    <a href="https://www.facebook.com/sharer/sharer.php?u={{ absolute_url(path('app_article_show', {'id': article.getId()})) }}" class="social-icon social-facebook" title="Facebook" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                                                    <a href="https://twitter.com/intent/tweet?text={{ article.titre|url_encode }}%20{{ absolute_url(path('app_article_show', {'id': article.getId()})) }}%20@ExploraTunisia" class="social-icon social-twitter" title="Twitter" target="_blank"><i class="fab fa-twitter-square"></i></a>
+                                                    <a href="https://www.reddit.com/submit?url={{ absolute_url(path('app_article_show', {'id': article.getId()})) }}" class="social-icon social-reddit" title="Reddit" target="_blank"><i class="fab fa-reddit"></i></a>                                                
+                                                    </div><!-- End .soial-icons -->
+                                            </div><!-- End .col-auto -->
+                                            
+                                        </div>
+                                        
+                                        </div><!-- End .col-auto -->
+                                           
+                                    </div><!-- End .entry-footer row no-gutters -->
+                                </div><!-- End .entry-body -->
+
+
+                            <div class="comments">
+                                <h3 class="title">Commentaires ({{ article.nbcommentaire  }})</h3><!-- End .title -->
+                                 
+                                <ul>
+                                 {% for commentaire in commentaires %}
+                                    <li>
+                                        <div class="comment">
+                                           
+                                            
+                                            {% if commentaire.user is not null %}
+                                            {# User is not null, so it's safe to access its properties #}
+                                            <div class="comment-user">
+                                                by <a href="#">{{ commentaire.user.nom }} {{ commentaire.user.prenom }}</a>
+                                                <span class="comment-date">{{ commentaire.date|date('Y-m-d H:i:s') }}</span>                                            </div><!-- End .comment-user -->
+                                       
+                                        {% endif %}
+
+                                            <div class="comment-body" >
+                                            
+                                              
+                                                
+                                                <div class="comment-content">
+                                                    <p>{{ commentaire.contenu }} </p> 
+                                                </div><!-- End .comment-content -->  
+
+                                                <div  style="text-align: left;">
+                                                    <a href="{{ path('app_commentaire_edit', {'id': commentaire.id}) }}"><i class="fas fa-edit fa-1.9x"></i></a> 
+                                                    <a href="{{ path('app_commentaire_deletefront', {'id': commentaire.id}) }}"><i class="fas fa-trash" style="color: red;"></i></a>
+                                                      
+                                              
+                                                </div>
+                                                                      
+                                                {% if app.user %}
+                                                    <a href="{{ path('app_commentaire_like', {'id': commentaire.id}) }}"><i class="fas fa-thumbs-up like-icon"></i> </a>
+                                                    {{commentaire.nblike}}               
+             
+                                                    <a href="{{ path('app_commentaire_dislike', {'id': commentaire.id}) }}"><i class="fas fa-thumbs-down dislike-icon"></i></a>
+                                                    {{commentaire.nbdislike}}
+                                                    {% else %}
+                                                    <a href="{{ path('app_commentaire_like', {'id': commentaire.id}) }}" style="pointer-events: none"><i class="fas fa-thumbs-up like-icon"></i> </a>
+                                                    {{commentaire.nblike}}               
+             
+                                                    <a href="{{ path('app_commentaire_dislike', {'id': commentaire.id}) }}" style="pointer-events: none"><i class="fas fa-thumbs-down dislike-icon"></i></a>
+                                                    {{commentaire.nbdislike}}
+                                                    {% endif %}
+                                            </div><!-- End .comment-body -->
+                     
+
+                                        </div><!-- End .comment -->
+
+                                      {% endfor %}   
+
+                            </div><!-- End .comments -->
+
+
+                            {% if app.user %}
+                            <div class="reply">
+                                <div class="heading">
+                                    <h3 class="title">Laissez un commentaire</h3><!-- End .title -->
+                                    <p class="title-desc">Votre adresse email ne sera pas publiée. les champs requis sont indiqués *</p>
+                                </div><!-- End .heading -->
+                               {{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
+                              
+                                <form >
+                                     {{ form_label(form.contenu, 'Titre', {'label_attr': {'class': 'control-label text-left font-weight-bold text-primary col-md-3'}}) }}
+                                     {{ form_widget(form.contenu, { 'attr': {'class':'form-control','type':"text"} }) }}
+                                     {{ form_row(form._token) }}
+                                     {{ form_errors(form.contenu) }}
+
+
+                              <style>
+                                .custom-button {
+                                    background-color: #86B817; /* your desired color */
+                                    color: #fff; /* text color */
+                                    border: none;
+                                    padding: 10px 20px;
+                                    cursor: pointer;
+                                }
+                              </style>
+                            
+                                <button type="submit" class="custom-button">
+                                    <span>Ajouter Commentaire</span>
+                                    <i class="icon-long-arrow-right"></i>
+                                </button>
+
+                                </form>
+                                 {{ form_end(form) }}
+                            </div><!-- End .reply -->
+                        {% endif %}
+                		</div><!-- End .col-lg-9 -->
+
+                		<aside class="col-lg-3">
+
+                			<div class="sidebar">
+
+                			</div><!-- End .sidebar sidebar-shop -->
+                		</aside><!-- End .col-lg-3 -->
+                	</div><!-- End .row -->
+                </div><!-- End .container -->
+            </div><!-- End .page-content -->
+        </main><!-- End .main -->
+
+
+<!-- ... (your existing content) ... -->
+</div><!-- End .page-wrapper -->
+
+<!-- Mobile Menu -->
+<!-- ... (your existing content) ... -->
+
+<!-- Sign in / Register Modal -->
+<!-- ... (your existing content) ... -->
+
+<!-- Plugins JS File -->
+{#<script src="assets/js/jquery.min.js"></script>
+<script src="assets/js/bootstrap.bundle.min.js"></script>
+<script src="assets/js/jquery.hoverIntent.min.js"></script>
+<script src="assets/js/jquery.waypoints.min.js"></script>
+<script src="assets/js/superfish.min.js"></script>
+<script src="assets/js/owl.carousel.min.js"></script>#}
+<!-- Main JS File -->
+<script src="assets/js/main.js"></script>
+</body>
+</html>
+
+{% endblock %}

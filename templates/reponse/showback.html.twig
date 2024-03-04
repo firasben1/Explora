@@ -1,0 +1,55 @@
+{% extends 'base2.html.twig' %}
+
+  {% block body %}
+  
+  <div class="container-fluid py-4">
+      <div class="row">
+          <div class="col-12">
+              <div class="card my-4">
+                  <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
+                      <div class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3">
+                          <h6 class="text-white text-capitalize ps-3 fs-4">Reponse Details</h6>
+                      </div>
+                  </div>
+                  <div class="card-body px-0 pb-2">
+                      <div class="table-responsive p-0">
+                          <table class="table table-striped align-items-center mb-0">
+                              <tbody>
+                                  <tr>
+                                      <th class="text-uppercase text-center text-xxs font-weight-bolder opacity-10 fs-4">Nom</th>
+                                      <td class="text-center fs-4">{{ reponse.reclamation.user.nom }}</td>
+                                  </tr>
+                                  <tr>
+                                      <th class="text-uppercase text-center text-xxs font-weight-bolder opacity-10 fs-4">Prenom</th>
+                                      <td class="text-center fs-4">{{ reponse.reclamation.user.prenom }}</td>
+                                  </tr>
+                                  <tr>
+                                      <th class="text-uppercase text-center text-xxs font-weight-bolder opacity-10 fs-4">Email</th>
+                                      <td class="text-center fs-4">{{ reponse.reclamation.user.email }}</td>
+                                  </tr>
+                                  <tr>
+                                      <th class="text-uppercase text-center text-xxs font-weight-bolder opacity-10 fs-4">Reponse</th>
+                                      <td class="text-center fs-4">{{ reponse.reponse }}</td>
+                                  </tr>
+                                  <tr>
+                                      <th class="text-uppercase text-center text-xxs font-weight-bolder opacity-10 fs-4">Statut</th>
+                                      <td class="text-center fs-4">{{ reponse.statut }}</td>
+                                  </tr>
+                                  <tr>
+                                      <th class="text-uppercase text-center text-xxs font-weight-bolder opacity-10 fs-4">Date</th>
+                                      <td class="text-center fs-4">{{ reponse.dateReponse ? reponse.dateReponse|date('Y-m-d H:i:s') : '' }}</td>
+                                  </tr>
+                              </tbody>
+                          </table>
+                      </div>
+                  </div>
+                  <div class="d-flex justify-content-center">
+                      <a href="{{ path('app_reponse_index_back') }}" class="btn btn-secondary">Back to list</a>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+  
+  {% endblock %}
+  

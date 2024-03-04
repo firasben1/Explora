@@ -1,0 +1,207 @@
+{% extends 'base1.html.twig' %}
+
+{% block body %}
+<style>
+    body {
+      
+        background-size: cover;
+        background-position: center;
+    }
+
+    form {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 120vh; /* Adjust the height as needed */
+    }
+
+    .form-box {
+        width: 60%;
+        max-width: 700px;
+        padding: 20px;
+        border: 2px solid #000;
+        border-radius: 0px;
+        background-color: #000; /* Couleur de fond */
+        background: rgba(240, 240, 240, 0.8);
+
+
+
+        backdrop-filter: blur(5px);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+   
+    }
+
+    .form-title {
+        text-align: center;
+        margin-bottom: 10px;
+        font-size: 30px;
+        color: #333;
+        font-weight: bold;
+    }
+    
+    .form-group {
+        margin-bottom: 10px;
+    }
+
+    label {
+        display: block;
+        margin-bottom: 2px;
+        font-weight: bold;
+        color: #000;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="number"],
+    input[type="checkbox"],
+    input[type="date"] {
+        width: 100%;
+        padding: 6px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+        font-size: 14px;
+    }
+
+    button[type="submit"] {
+        background-color: #28a745;
+        color: #fff;
+        border: none;
+        padding: 8px 12px;
+        border-radius: 4px;
+        cursor: pointer;
+        transition: background-color 0.3s ease-in-out;
+        display: block;
+        margin: 10px auto 0;
+        width: fit-content;
+        font-size: 14px;
+    }
+
+    button[type="submit"]:hover {
+        background-color: #218838;
+    }
+    .form-box {
+        margin-top: 20px; /* Adjust this value to push the form down from the header */
+        margin-bottom: 20px; /* Adjust this value to push the form up from the footer */
+        /* ... existing .form-box styles ... */
+    }
+    .content {
+        padding-top: 60px; /* Height of your header */
+        padding-bottom: 60px; /* Height of your footer */
+        /* Adjust padding as needed to ensure there's space for the header and footer */
+    }
+    .switch {
+        position: relative;
+        display: inline-block;
+        width: 60px;
+        height: 34px;
+    }
+
+    .switch input { 
+        opacity: 0;
+        width: 0;
+        height: 0;
+    }
+
+    .slider {
+        position: absolute;
+        cursor: pointer;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: #ccc;
+        -webkit-transition: .4s;
+        transition: .4s;
+    }
+
+    .slider:before {
+        position: absolute;
+        content: "";
+        height: 26px;
+        width: 26px;
+        left: 4px;
+        bottom: 4px;
+        background-color: white;
+        -webkit-transition: .4s;
+        transition: .4s;
+    }
+
+    input:checked + .slider {
+        background-color: #2196F3;
+    }
+
+    input:focus + .slider {
+        box-shadow: 0 0 1px #2196F3;
+    }
+
+    input:checked + .slider:before {
+        -webkit-transform: translateX(26px);
+        -ms-transform: translateX(26px);
+        transform: translateX(26px);
+    }
+
+    /* La forme arrondie des extrémités du slider */
+    .slider.round {
+        border-radius: 34px;
+    }
+
+    .slider.round:before {
+        border-radius: 50%;
+    }
+</style>
+
+<form method="post">
+    <div class="form-box">
+        <div class="form-title">Formulaire de Location</div>
+        {{ form_start(form) }}
+        <div class="form-group">
+            {{ form_label(form.Nom) }}
+            {{ form_widget(form.Nom, { 'attr': {'class': 'form-control'} }) }}
+        </div>
+        <div class="form-group">
+            {{ form_label(form.Prenom) }}
+            {{ form_widget(form.Prenom, { 'attr': {'class': 'form-control'} }) }}
+        </div>
+        <div class="form-group">
+            {{ form_label(form.Mail) }}
+            {{ form_widget(form.Mail, { 'attr': {'class': 'form-control'} }) }}
+        </div>
+        <div class="form-group">
+            {{ form_label(form.Mobile) }}
+            {{ form_widget(form.Mobile, { 'attr': {'class': 'form-control'} }) }}
+        </div>
+        <div class="form-group">
+            {{ form_label(form.Adresse) }}
+            {{ form_widget(form.Adresse, { 'attr': {'class': 'form-control'} }) }}
+        </div>
+        <div class="form-group">
+            {{ form_label(form.Date_prise) }}
+            {{ form_widget(form.Date_prise, { 'attr': {'class': 'form-control'} }) }}
+        </div>
+        <div class="form-group">
+            {{ form_label(form.Date_depot) }}
+            {{ form_widget(form.Date_depot, { 'attr': {'class': 'form-control'} }) }}
+        </div>
+        <div class="form-group">
+            {{ form_label(form.Num_Cin) }}
+            {{ form_widget(form.Num_Cin, { 'attr': {'class': 'form-control'} }) }}
+        </div>
+        <div class="form-group">
+            {{ form_label(form.permis_conduite) }}
+            {{ form_widget(form.permis_conduite) }}
+        </div>
+         <div class="form-group toggle-switch">
+        {{ form_label(form.chauffeur) }}
+        <label class="switch">
+            {{ form_widget(form.chauffeur) }}
+            <span class="slider round"></span>
+        </label>
+    </div>
+        <button type="submit" class="btn-primary">Soumettre</button>
+        {{ form_end(form) }}
+    </div>
+    
+</form>
+
+{% endblock %}

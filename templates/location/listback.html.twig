@@ -1,0 +1,65 @@
+{% extends 'base2.html.twig' %}
+
+{% block title %}
+    <title>Liste des Locations</title>
+{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <h1>Liste des Locations</h1>
+
+        <div class="table-responsive">
+            <table class="table table-striped table-hover">
+                <thead class="thead-dark">
+                    <tr>
+                        <th scope="col">ID</th>
+                        <th scope="col">Nom</th>
+                        <th scope="col">Prénom</th>
+                        <th scope="col">Mail</th>
+                        <th scope="col">Mobile</th>
+                        <th scope="col">Adresse</th>
+                        <th scope="col">Date de prise</th>
+                        <th scope="col">Date de dépôt</th>
+                        <th scope="col">Numéro de CIN</th>
+                        <th scope="col">Prix</th>
+                        <th scope="col">Permis de conduite</th>
+                        <th scope="col">Voiture</th>
+                        <th scope="col">User</th>
+                        <th scope="col">Statut</th>
+                        
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for location in locations %}
+                        <tr>
+                            <td>{{ location.id }}</td>
+                            <td>{{ location.nom }}</td>
+                            <td>{{ location.prenom }}</td>
+                            <td>{{ location.mail }}</td>
+                            <td>{{ location.mobile }}</td>
+                            <td>{{ location.adresse }}</td>
+                            <td>{{ location.datePrise ? location.datePrise|date('d-m-Y') : '' }}</td>
+                            <td>{{ location.dateDepot ? location.dateDepot|date('d-m-Y') : '' }}</td>
+                            <td>{{ location.numCin }}</td>
+                            <td>{{ location.prix }}</td>
+                            <td>{{ location.permisConduite }}</td>
+                            <td>{% if location.voiture %}
+                                {{ location.voiture.marque }}
+
+                            {% endif %}</td>
+                            <td>{% if location.user %}
+                                {{ location.user.nom }}
+                                
+                            {% endif %}</td>
+                            <td>
+                                <a href="{{ path('app_confirmerlocation', {'id': location.id}) }}" class="btn btn-success">Confirmer</a>
+                                <a href="{{ path('app_refuserlocation', {'id': location.id}) }}" class="btn btn-warning">Refuser</a>
+                            </td>
+                            
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock %}

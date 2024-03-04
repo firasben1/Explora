@@ -1,0 +1,56 @@
+{% extends 'base1.html.twig' %}
+
+    {% block title %}
+        <title>Reservation</title>
+    {% endblock %}
+    
+    {% block body %}
+        <div class="container mt-5">
+            <div class="row justify-content-center">
+                <div class="col-md-8">
+                    <h1 class="text-center mb-4">Reservation Details</h1>
+    
+                    <table class="table">
+                        <tbody>
+                           
+                            <tr>
+                                <th>Etat</th>
+                                <td>{{ reservation.Etat }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+    
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Email</th>
+                                <th>Numero</th>
+                                <th>Nom</th>
+                                <th>Prenom</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for participation in participations %}
+                                <tr>
+                                    <td>{{ participation.Email }}</td>
+                                    <td>{{ participation.Numero }}</td>
+                                    <td>{{ participation.Nom }}</td>
+                                    <td>{{ participation.Prenom }}</td>
+                                </tr>
+                            {% else %}
+                                <tr>
+                                    <td colspan="4">No records found</td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+    
+                    <div class="text-center">
+                        <a href="{{ path('app_reservation_index_User') }}" class="btn btn-success" style="background-color: #86b817;">Back to Reservation List</a>
+                        <a href="{{ path('app_evenement_index_User') }}" class="btn btn-success" style="background-color: #86b817;">Back to Event List</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endblock %}
+    

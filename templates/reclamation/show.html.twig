@@ -1,0 +1,61 @@
+{% extends 'base1.html.twig' %}
+
+{% block title %}
+    Reclamation {{ rec.id }}
+{% endblock %}
+
+{% block body %}
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="card-header bg-primary text-white">
+                        <h5 class="mb-0">Reclamation Details</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-3">
+                                <strong>Titre:</strong>
+                            </div>
+                            <div class="col-md-9">
+                                {{ rec.Titre }}
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-md-3">
+                                <strong>Description:</strong>
+                            </div>
+                            <div class="col-md-9">
+                                {{ rec.description }}
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-md-3">
+                                <strong>Date:</strong>
+                            </div>
+                            <div class="col-md-9">
+                                {{ rec.date|date('d-m-Y') }}
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-md-3">
+                                <strong>Image:</strong>
+                            </div>
+                            <div class="col-md-9">
+                                <img src=" {{ vich_uploader_asset(rec, 'imageFile') }}" width="600" alt="rec Image">
+                                               {{ rec.imageFile }}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer text-center">
+                        <a href="{{ path('list_reclamation') }}" class="btn btn-sm btn-secondary"><i class="fas fa-arrow-left"></i> Back to List</a>
+                        <a href="{{ path('app_Reclamation_edit', {'id': rec.id}) }}" class="btn btn-sm btn-primary"><i class="fas fa-edit"></i> Edit</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

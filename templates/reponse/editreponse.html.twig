@@ -1,0 +1,43 @@
+{% extends 'base2.html.twig' %}
+
+{% block body %}
+    <title>Edit Reponse</title>
+
+    <h1> Edit Response</h1>
+    {{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
+    <div class="page-content mt-16">
+        <div class="checkout">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-9">
+                        <div class="row">
+                            <div class="col-md-12">
+                                {{ form_row(form.idUtilisateur, {'label': 'ID Utilisateur', 'attr': {'class': 'form-control'}}) }}
+                                {{ form_errors(form.idUtilisateur) }}
+                            </div>
+                            <div class="col-md-12">
+                                {{ form_row(form.Titre, {'label': 'Titre', 'attr': {'class': 'form-control'}}) }}
+                                {{ form_errors(form.Titre) }}
+                            </div>
+                            <div class="col-md-12">
+                                {{ form_row(form.description, {'label': 'Description', 'attr': {'class': 'form-control'}}) }}
+                                {{ form_errors(form.description) }}
+                            </div>
+                        </div><!-- End .row -->
+                    </div><!-- End .col-lg-9 -->
+                </div><!-- End .row -->
+            </div><!-- End .container -->
+        </div><!-- End .checkout -->
+    </div><!-- End .page-content -->
+    
+    <div class="row justify-content-center mt-3"> {# Center-align the row #}
+        <div class="col-auto"> {# Create a column with auto width #}
+            <a href="{{ path('list_reclamation') }}" class="btn btn-secondary">Back to list</a>
+        </div>
+        <div class="col-auto"> {# Create another column with auto width #}
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </div>
+    
+    {{ form_rest(form) }}
+    {{ form_end(form) }}
+{% endblock %}

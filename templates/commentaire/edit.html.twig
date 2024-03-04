@@ -1,0 +1,48 @@
+{% extends 'base1.html.twig' %}
+
+{% block body %}
+<title>Edit Commentaire</title>
+
+
+  <h4>Editer Commentaire</h4>
+
+{{ form_start(form,{'attr': {'novalidate': 'novalidate'}} ) }}
+	<form >
+		                	<div class="page-content">
+            	<div class="checkout">
+	                <div class="container"><div class="row">
+		                		<div class="col-lg-9">
+		                				<div class="row">
+		                					
+						{{form_label(form.contenu, 'Contenu', {'label_attr': {'class': 'control-label text-left font-weight-bold text-primary col-md-3'}}) }}
+                        {{ form_widget(form.contenu, { 'attr': {'class':'form-control','type':"text"} }) }}
+						{{ form_errors(form.contenu) }}
+
+
+
+                       
+
+	            		
+<div class="card-footer bg-light">
+                    <div class="form-actions">
+                        <div class="row">
+                            <div class="col-md-12">
+                                
+                                        <button type="Submit"  class="btn btn-primary btn-rounded" >Update </button>
+                                        <button class="btn btn-secondary clear-form btn-rounded btn-outline">Annuler</button>
+                                   
+                            </div>
+                        </div>
+                    </div>
+
+	        							
+
+	                					
+		                		</div><!-- End .col-lg-9 -->
+		                		<div>
+		                		<div>
+		                				
+		                	</div><!-- End .row -->
+            			</form>
+						 {{form_end(form)}}
+{% endblock %}

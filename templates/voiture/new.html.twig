@@ -1,0 +1,104 @@
+{% extends 'base2.html.twig' %}
+
+{% block title %}Nouvelle Voiture{% endblock %}
+
+{% block body %}
+<style>
+body {
+        background-image: url('/img/carrr.webp'); /* Remplacez avec le chemin correct de l'image */
+        background-size: cover;
+        background-position: center;
+        background-attachment: fixed;
+    }
+
+
+
+    .wrapper {
+        max-width: 600px;
+        margin: 30px auto;
+        padding: 20px;
+        border: 1px solid #dedede;
+        border-radius: 5px;
+        background: #f9f9f9;
+    }
+
+    h1 {
+        text-align: center;
+        color: #333;
+    }
+
+    .form-group {
+        margin-bottom: 15px;
+    }
+
+    .form-label {
+        margin-bottom: 5px;
+        display: block;
+        font-weight: bold;
+    }
+
+    .form-control {
+        width: 100%;
+        padding: 8px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+    }
+
+    .btn-success {
+        background-color: #28a745;
+        border-color: #28a745;
+        color: white;
+        padding: 10px 15px;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 16px;
+        display: block;
+        width: 100%;
+        margin-top: 10px;
+    }
+
+    .btn-success:hover {
+        background-color: #218838;
+        border-color: #1e7e34;
+    }
+</style>
+
+<div class="wrapper">
+    <h1>Créer une nouvelle voiture</h1>
+    {{ form_start(form) }}
+    
+    <div class="form-group">
+        {{ form_label(form.Categories) }}
+        {{ form_widget(form.Categories, {'attr': {'class': 'form-control'}}) }}
+        {{ form_errors(form.Categories) }}
+    </div>
+
+    <div class="form-group">
+        {{ form_label(form.Marque) }}
+        {{ form_widget(form.Marque, {'attr': {'class': 'form-control'}}) }}
+        {{ form_errors(form.Marque) }}
+    </div>
+
+    <div class="form-group">
+        {{ form_label(form.Couleur) }}
+        {{ form_widget(form.Couleur, {'attr': {'class': 'form-control'}}) }}
+        {{ form_errors(form.Couleur) }}
+    </div>
+
+    <div class="form-group">
+        {{ form_label(form.prix) }}
+        {{ form_widget(form.prix, {'attr': {'class': 'form-control'}}) }}
+        {{ form_errors(form.prix) }}
+    </div>
+
+    <div class="form-group">
+        {{ form_label(form.imageName, 'Image de la voiture') }}
+        {{ form_widget(form.imageName, {'attr': {'class': 'form-control'}}) }}
+        {{ form_errors(form.imageName) }}
+    </div>
+
+    <button type="submit" class="btn btn-success">Enregistrer</button>
+    {{ form_end(form) }}
+</div>
+{% endblock %}

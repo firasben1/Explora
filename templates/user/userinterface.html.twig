@@ -1,0 +1,32 @@
+{% extends 'base1.html.twig' %}
+
+	{% block body %}
+	<div class="container mt-5">
+		{% if app.user %}
+			<h1 class="text-center">Détails du profil :</h1>
+			<div class="row justify-content-center">
+				<div class="col-md-6">
+					<div class="text-center">
+						<img src="{{ vich_uploader_asset(app.user, 'imageFile') }}" class="img-fluid rounded-circle" width="150" alt="Profile Image">
+					</div>
+					<ul class="list-group mt-3">
+						<li class="list-group-item">
+							<p class="mb-0">Prénom : {{ app.user.prenom }}</p>
+						</li>
+						<li class="list-group-item">
+							<p class="mb-0">Nom : {{ app.user.nom }}</p>
+						</li>
+						<li class="list-group-item">
+							<p class="mb-0">Email : {{ app.user.email }}</p>
+						</li>
+						<li class="list-group-item">
+							<a class="nav-link" href="{{ path('app_user_edit') }}">Modifier le profil</a>
+							<a class="nav-link" href="{{ path('app_logout') }}">Déconnecter</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+		{% endif %}
+	</div>
+	{% endblock %}
+	

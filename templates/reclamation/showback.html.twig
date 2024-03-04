@@ -1,0 +1,93 @@
+{% extends 'base2.html.twig' %}
+
+{% block body %}
+
+  <head>
+    <title>reclamation</title>
+    <style>
+      body {
+        background-color: #f7f7f7;
+        font-family: sans-serif;
+      }
+
+      h1 {
+        color: #333;
+        margin: 20px 0;
+        font-size: 36px;
+      }
+
+      table {
+        border-collapse: collapse;
+        width: 100%;
+        margin-bottom: 20px;
+        background-color: #fff;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      }
+
+      th,
+      td {
+        text-align: left;
+        padding: 8px;
+        border-bottom: 1px solid #ddd;
+      }
+
+      th {
+        background-color: #f2f2f2;
+      }
+
+      a {
+        color: #333;
+        text-decoration: none;
+        margin-right: 10px;
+      }
+
+      .no-records {
+        color: #999;
+      }
+
+    </style>
+  </head>
+  <body>
+    <div class="card-header p-0 position-relative mt-n1 mx-2 z-index-2">
+      <div class="bg-gradient-primary shadow-primary border-radius-lg pt-3 pb-3">
+          <h6 class="text-white text-capitalize ps-1 fs-5">Reclamation Details</h6>
+      </div>
+  </div>
+
+    <table>
+        <tbody>
+            <tr>
+                <th>ID</th>
+                <td>{{ reclamation.id }}</td>
+            </tr>
+            <tr>
+                <th>Titre</th>
+                <td>{{ reclamation.titre }}</td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>{{ reclamation.description }}</td>
+            </tr>
+            <tr>
+              <th>Image</th>
+              <td class="align-middle text-center text-sm">
+                <img src=" {{ vich_uploader_asset(reclamation, 'imageFile') }}" width="600"" alt="reclamation Image">
+                                               {{ reclamation.imageFile }}
+              </td>
+            </tr>
+            <tr>
+                <th>Date</th>
+                <td>{{ reclamation.date ? reclamation.date|date('Y-m-d') : '' }}</td>
+            </tr>
+            <tr>
+                <th></th>
+                <td>
+                    <a href="{{ path('add_reponse', {'id': reclamation.id}) }}" class="btn btn-primary">
+                        <i class="fas fa-reply"></i> Reply
+                    </a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    
+{% endblock %}

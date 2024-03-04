@@ -1,0 +1,56 @@
+{% extends 'base1.html.twig' %}
+
+{% block body %}
+<main class="main">
+    <!-- Your existing code goes here... -->
+    <h1 class="text-center">Liste des articles</h1>
+
+    <div iv class="container">
+            <!-- Add this section for the blog entries -->
+            <div class="entry-container row" data-layout="fitRows">
+                {% for article in articles %}
+                    <div class="entry-item col-md-6 col-lg-4">
+                        <article class="entry entry-mask">
+                            <figure class="entry-media">
+                                <a href="{{ path('app_article_show', {'id': article.id}) }}">
+                                    <img src="{{ vich_uploader_asset(article, 'imageFile') }}" alt="image desc" style="max-width: 100%; height: auto;">
+                                </a>
+                            </figure><!-- End .entry-media -->
+
+                            <div class="entry-content-box">
+                                <div class="entry-meta">
+                                    <!-- Your meta data here -->
+                                </div><!-- End .entry-meta -->
+
+                                <h2 class="entry-title">
+                                    <a href="{{ path('app_article_show', {'id': article.id}) }}">{{ article.titre|slice(0, 18) }}</a>
+                                </h2><!-- End .entry-title -->
+
+                                <div class="entry-cats">
+                                    <!-- Your entry categories logic goes here -->
+                                </div><!-- End .entry-cats -->
+                            </div><!-- End .entry-content-box -->
+                        </article><!-- End .entry -->
+                    </div><!-- End .entry-item -->
+                    
+                {% endfor %}
+                <div class="mb-3"></div><!-- End .mb-3 -->
+
+                    <nav aria-label="Page navigation">
+                        <ul class="pagination justify-content-center">
+                            <li class="page-item disabled">
+                               
+                          
+                        </ul>
+                    </nav>
+                </div><!-- End .container -->
+            <div class="d-flex justify-content-center">
+  {% do articles.SetPageRange(2) %}
+  {{ knp_pagination_render(articles, "pagination.html.twig") }}
+</div>
+            </div><!-- End .entry-container -->
+        </div><!-- End .container -->
+    </div><!-- End .page-content -->
+</main>
+{% endblock %}
+ 

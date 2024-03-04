@@ -1,0 +1,116 @@
+
+{% extends 'base2.html.twig' %}
+
+    {% block body %}
+    
+      <head>
+        <title>user</title>
+        <style>
+          body {
+            background-color: #f7f7f7;
+            font-family: sans-serif;
+          }
+    
+          h1 {
+            color: #333;
+            margin: 20px 0;
+            font-size: 36px;
+          }
+    
+          table {
+            border-collapse: collapse;
+            width: 100%;
+            margin-bottom: 20px;
+            background-color: #fff;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+          }
+    
+          th,
+          td {
+            text-align: left;
+            padding: 8px;
+            border-bottom: 1px solid #ddd;
+          }
+    
+          th {
+            background-color: #f2f2f2;
+          }
+    
+          a {
+            color: #333;
+            text-decoration: none;
+            margin-right: 10px;
+          }
+    
+          .no-records {
+            color: #999;
+          }
+    
+        </style>
+      </head>
+      <body>
+        <h1>user</h1>
+    
+        <table>
+          <tbody>
+        
+            <tr>
+              <th>Titre</th>
+              <td>{{ user.titre }}</td>
+            </tr>
+            <tr>
+              <th>Description</th>
+              <td>{{ user.description }}</td>
+            </tr>
+            <tr>
+              <th>Image</th>
+              <td class="align-middle text-center text-sm">
+                           <figure class="entry-media">
+                                        <img src=" {{ vich_uploader_asset(user, 'imageFile') }}" width="250"alt="user Image">
+                                                   {{ user.imageFile }}
+    
+                                    </figure><!-- End .entry-media -->
+                          </td>
+            </tr>
+            <tr>
+              <th>Date</th>
+              <td>{{ user.date ? user.date|date('Y-m-d') : '' }}</td>
+            </tr>
+            <tr>
+              <th>Nbcommenatire</th>
+              <td>{{ user.nbcommentaire }}</td>
+            </tr>
+          </tbody>
+        </table>
+    
+        <h1>Commentaire </h1>
+    
+        <table>
+          <thead>
+            <tr>
+             <th class="text-center">Id</th>
+              <th class="text-center">Contenu</th>
+              <th class="text-center">Date</th>
+              <th class="text-center">Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for commentaire in commentaires %}
+            <tr>
+              <td class="text-center">{{ commentaire.id }}</td>
+              <td class="text-center">{{ commentaire.contenu }}</td>
+              <td class="text-center">{{ commentaire.date ? commentaire.date|date('Y-m-d') : '' }}</td>
+              <td class="text-center">
+               
+                <a href="{{ path('app_commentaire_delete', {'id': commentaire.id}) }}"><i class="fas fa-trash"></i></a>
+              </td>
+            </tr>
+            {% else %}
+            <tr>
+              <td colspan="4" class="no-records">No records found</td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </body>
+    {% endblock %}

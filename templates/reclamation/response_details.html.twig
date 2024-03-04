@@ -1,0 +1,40 @@
+{% extends 'base1.html.twig' %}
+
+    {% block title %}
+        Response Details
+    {% endblock %}
+    
+    {% block body %}
+        <div class="container mt-5">
+            <div class="row justify-content-center">
+                <div class="col-md-8">
+                    <div class="card" style="border-radius: 15px; overflow: hidden;">
+                        <div class="card-header bg-primary text-white">
+                            <h5 class="mb-0">Response Details</h5>
+                        </div>
+                        <div class="card-body">
+                            {% if response is not null %}
+                                <div class="mb-3">
+                                    <strong>Description:</strong> {{ response.reponse }}
+                                </div>
+                                <div class="mb-3">
+                                    <strong>Date:</strong> {{ response.dateReponse|date('Y-m-d H:i:s') }}
+                                </div>
+                                <div class="mb-3">
+                                    <strong>Statut:</strong> {{ response.statut }}
+                                </div>
+                            {% else %}
+                                <p>No response found for the given ID.</p>
+                            {% endif %}
+                            
+                            
+                        </div>
+                    </div>
+                    <div class="text-center mt-4"> {# Center the button using text-center class #}
+                                <a href="{{ path('list_reclamation') }}" class="btn btn-sm btn-secondary"><i class="fas fa-arrow-left"></i> Back to List</a>
+                            </div>
+                </div>
+            </div>
+        </div>
+    {% endblock %}
+    

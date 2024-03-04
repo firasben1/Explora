@@ -1,0 +1,59 @@
+{% extends 'base1.html.twig' %}
+
+    {% block body %}
+    <title>Edit Profile</title>
+    
+    
+           <h1>Editer Profile</h1>
+    {{ form_start(form,{'attr': {'novalidate': 'novalidate'}} ) }}
+        <form >
+                                <div class="page-content">
+                    <div class="checkout">
+                        <div class="container"><div class="row">
+                                    <div class="col-lg-9">
+                                            <div class="row">
+                                                
+                            {{form_label(form.nom, 'Nom', {'label_attr': {'class': 'control-label text-left font-weight-bold text-primary col-md-3'}}) }}
+                            {{ form_widget(form.nom, { 'attr': {'class':'form-control','type':"text"} }) }}
+                            {{ form_errors(form.nom) }}
+    
+    
+    
+                            {{ form_label(form.prenom, 'prenom', {'label_attr': {'class': 'control-label text-left font-weight-bold text-primary col-md-3'}}) }}
+                            {{ form_widget(form.prenom, { 'attr': {'class':'form-control','type':"text"} }) }}
+                            {{ form_errors(form.prenom) }}
+                            
+                            
+                            {{ form_label(form.password, 'password', {'label_attr': {'class': 'control-label text-left font-weight-bold text-primary col-md-3'}}) }}
+                            {{ form_widget(form.password, { 'attr': {'class':'form-control','type':"text"} }) }}
+                            {{ form_errors(form.password) }}
+
+
+                            {{ form_label(form.email, 'email', {'label_attr': {'class': 'control-label text-left font-weight-bold text-primary col-md-3'}}) }}
+                            {{ form_widget(form.email, { 'attr': {'class':'form-control','type':"text"} }) }}
+                            {{ form_errors(form.email) }}
+    
+                            
+    <div class="card-footer bg-light">
+                        <div class="form-actions">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    
+                                            <button type="Submit"  class="btn btn-primary btn-rounded" >Modifier </button>
+                                       
+                                </div>
+                            </div>
+                        </div>
+    
+                                            
+    
+                                            
+                                    </div><!-- End .col-lg-9 -->
+                                    <div>
+                                    <div>
+                                            
+                                </div><!-- End .row -->
+                            </form>
+                             {{form_end(form)}}
+    {% endblock %}
+    

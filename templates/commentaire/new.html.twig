@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+
+<title>New Commentaire</title>
+
+{% block body %}
+    <div class="reply">
+                                <div class="heading">
+                                    <h3 class="title">Laissez un commentaire</h3><!-- End .title -->
+                                    <p class="title-desc">Votre adresse email ne sera pas publiée. les champs requis sont indiqués *</p>
+                                </div><!-- End .heading -->
+
+                                <form>
+{{ form_start(form,{'attr': {'novalidate': 'novalidate'}} ) }}
+                               {{ form_label(form.contenu, 'Titre', {'label_attr': {'class': 'control-label text-left font-weight-bold text-primary col-md-3'}}) }}
+                               {{ form_widget(form.contenu, { 'attr': {'class':'form-control','type':"text"} }) }}
+                               {{ form_errors(form.contenu) }}
+                                    <button type="submit" class="btn btn-outline-primary-2">
+                                        <span>Ajouter Commentaire</span>
+                                        <i class="icon-long-arrow-right"></i>
+                                    </button>
+                                </form>
+                                {{ form_end(form) }}
+                            </div><!-- End .reply -->
+                		</div><!-- End .col-lg-9 -->
+{% endblock %}

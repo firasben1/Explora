@@ -1,0 +1,129 @@
+{% extends 'base1.html.twig' %}
+
+    {% block body %}
+    <h1 class="text-center">Liste des Voitures</h1>
+    
+    <!-- Barre de recherche -->
+    <div class="input-group mb-3">
+      <input type="text" class="form-control" id="searchInput" placeholder="Rechercher une voiture...">
+      <div class="input-group-append">
+        <span class="input-group-text"><i class="fas fa-search"></i></span>
+      </div>
+    </div>
+    
+    <div class="container mt-4">
+        <div class="row">
+            {% for voiture in voitures %}
+                <div class="col-md-6 col-lg-4 mb-3 card" style="display: block;">
+                    <div class="card">
+                        {% if voiture.image %}
+                            <img src="{{ asset(voiture.image) }}" class="card-img-top" alt="Car Image">
+                        {% else %}
+                            <img src="{{ asset('public/uploads/images/default.jpg') }}" class="card-img-top" alt="Default Car Image">
+                        {% endif %}
+                        <div class="card-body">
+                            <h5 class="card-title">{{ voiture.Marque }}</h5>
+                            <p class="card-text">{{ voiture.Categories }} - {{ voiture.Couleur }}</p>
+                            <p class="card-text">{{ voiture.prix }} DNT/par jour</p>
+                            
+                            <div class="rating" data-car-id="{{ voiture.id }}">
+                                <span class="star" data-value="1">&#9733;</span>
+                                <span class="star" data-value="2">&#9733;</span>
+                                <span class="star" data-value="3">&#9733;</span>
+                                <span class="star" data-value="4">&#9733;</span>
+                                <span class="star" data-value="5">&#9733;</span>
+                            </div>
+                            <input type="hidden" id="rating_input_{{ voiture.id }}" name="rating" value="">
+                            
+                            <div >
+                                {% if app.user %}
+    <a href="{{ path('app_location', {'id': voiture.id}) }}" class="btn btn-primary">Louer</a>
+                                {% endif %}
+
+    <a href="{{ path('app_voiture_showF', {'id': voiture.id}) }}" class="btn btn-primary">Détails</a>
+   
+</div>
+
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+            <div class="mb-3"></div>
+            
+            <nav aria-label="Page navigation">
+                <ul class="pagination justify-content-center"></ul>
+            </nav>
+            <div class="d-flex justify-content-center">
+                {% do voitures.SetPageRange(3) %}
+                {{ knp_pagination_render(voitures, "pagination.html.twig") }}
+            </div>
+        </div>
+    </div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const searchInput = document.getElementById('searchInput');
+        const cards = document.querySelectorAll('.card');
+
+        searchInput.addEventListener('input', function() {
+            const searchTerm = searchInput.value.toLowerCase();
+
+            cards.forEach(card => {
+                const cardTitle = card.querySelector('.card-title').innerText.toLowerCase();
+                const cardText = card.querySelector('.card-text').innerText.toLowerCase();
+
+                if (cardTitle.includes(searchTerm) || cardText.includes(searchTerm)) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        });
+
+        const ratings = document.querySelectorAll('.rating');
+
+        ratings.forEach(rating => {
+            const stars = rating.querySelectorAll('.star');
+            const carId = rating.getAttribute('data-car-id');
+            const ratingInput = document.getElementById('rating_input_' + carId);
+
+            stars.forEach(star => {
+                star.addEventListener('click', function() {
+                    const value = this.getAttribute('data-value');
+                    ratingInput.value = value;
+                    updateStars(stars, value);
+                });
+            });
+        });
+
+        function updateStars(stars, value) {
+            stars.forEach(star => {
+                if (star.getAttribute('data-value') <= value) {
+                    star.classList.add('selected');
+                } else {
+                    star.classList.remove('selected');
+                }
+            });
+        }
+    });
+</script>
+
+<style>
+    .rating {
+        font-size: 0; /* Supprime l'espacement entre les éléments */
+    }
+
+    .rating .star {
+        font-size: 24px; /* Taille de l'étoile */
+        color: gray;
+        cursor: pointer;
+        margin-right: 5px; /* Espacement entre les étoiles */
+    }
+
+    .rating .star.selected {
+        color: gold; /* Couleur dorée pour les étoiles sélectionnées */
+        
+    }
+</style>
+
+{% endblock %}
